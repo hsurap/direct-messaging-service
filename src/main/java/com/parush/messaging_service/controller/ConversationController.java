@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/conversations")
 public class ConversationController {
 
   private static final Logger log = LoggerFactory.getLogger(ConversationController.class);
@@ -25,9 +25,9 @@ public class ConversationController {
   }
 
   @GetMapping("/{userId}/conversations")
-  public ResponseEntity<List<ConversationResponse>> getConversations(@PathVariable String userId) {
+  public ResponseEntity<List<ConversationResponse>> getConversations(@PathVariable final String userId) {
     log.info("Received request to list conversations for user {}", userId);
-    List<ConversationResponse> conversations = conversationService.getConversationsForUser(userId);
+    final List<ConversationResponse> conversations = conversationService.getConversationsForUser(userId);
     return ResponseEntity.ok(conversations);
   }
 

@@ -8,6 +8,6 @@ public interface MessageService {
 
   MessageResponse sendMessage(final SendMessageRequest request);
 
-  PagedResponse<MessageResponse> getConversationHistory(String conversationId, String requestingUserId, String cursor, int limit);
+  PagedResponse<MessageResponse> getConversationHistory(final String conversationId, final String requestingUserId, final String cursor, final int limit);
 
 }

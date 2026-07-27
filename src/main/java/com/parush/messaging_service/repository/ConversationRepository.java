@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ConversationRepository extends MongoRepository<Conversation, String> {
 
   @Query("{ 'participantIds': { '$all': [?0, ?1] } }")
-  Optional<Conversation> findByParticipants(String participantOne, String participantTwo);
+  Optional<Conversation> findByParticipants(final String participantOne, final String participantTwo);
 
-  List<Conversation> findByParticipantIdsContainingOrderByLastMessageAtDesc(String userId);
+  List<Conversation> findByParticipantIdsContainingOrderByLastMessageAtDesc(final String userId);
 }

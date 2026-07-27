@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/messages")
 public class MessageController {
 
-
   private static final Logger log = LoggerFactory.getLogger(MessageController.class);
 
   private final MessageService messageService;
@@ -31,21 +30,21 @@ public class MessageController {
   }
 
   @PostMapping
-  public ResponseEntity<MessageResponse> sendMessage(@Valid @RequestBody SendMessageRequest request) {
+  public ResponseEntity<MessageResponse> sendMessage(@Valid @RequestBody final SendMessageRequest request) {
     log.info("Received send-message request: sender={}, recipient={}", request.getSenderId(), request.getRecipientId());
-    MessageResponse response = messageService.sendMessage(request);
+    final MessageResponse response = messageService.sendMessage(request);
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
   @GetMapping("/conversations/{conversationId}")
   public ResponseEntity<PagedResponse<MessageResponse>> getConversationHistory(
-      @PathVariable String conversationId,
-      @RequestParam String requestingUserId,
+      @PathVariable final String conversationId,
+      @RequestParam final String requestingUserId,
       @RequestParam(required = false) String cursor,
-      @RequestParam(defaultValue = "20") int limit) {
+      @RequestParam(defaultValue = "20") final int limit) {
 
     log.info("Received history request for conversation {} by user {}", conversationId, requestingUserId);
-    PagedResponse<MessageResponse> response = messageService.getConversationHistory(conversationId, requestingUserId, cursor, limit);
+    final PagedResponse<MessageResponse> response = messageService.getConversationHistory(conversationId, requestingUserId, cursor, limit);
     return ResponseEntity.ok(response);
   }
 
